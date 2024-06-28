@@ -3,9 +3,11 @@ package com.tienda_libros.service;
 import com.tienda_libros.model.Libro;
 import com.tienda_libros.repository.LibroRepositorio;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class LibroServicio implements ILibroServicio{
 
     @Autowired
