@@ -5,3 +5,16 @@ CREATE SCHEMA `tienda_libros_db` ;
 USE tienda_libros_db
 
 -- CREAMOS LAS TABLAS EN LA BASE DE DATOS
+CREATE TABLE `tienda_libros_db`.`libro` (
+  `idlibro` INT NOT NULL AUTO_INCREMENT,
+  `nombre_libro` VARCHAR(45) NULL,
+  `autor` VARCHAR(45) NULL,
+  `existencias` INT NULL,
+  `precio` DOUBLE NULL,
+  PRIMARY KEY (`idlibro`));
+
+-- ORDEN CORRECTO DE LAS TABLAS
+ALTER TABLE `tienda_libros_db`.`libro`
+CHANGE COLUMN `nombre_libro` `nombre_libro` VARCHAR(255) NULL DEFAULT NULL AFTER `id_libro`,
+CHANGE COLUMN `precio` `precio` DOUBLE NOT NULL AFTER `autor`;
+
