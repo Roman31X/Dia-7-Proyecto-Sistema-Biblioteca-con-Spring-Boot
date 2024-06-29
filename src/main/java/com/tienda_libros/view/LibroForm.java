@@ -32,6 +32,7 @@ public class LibroForm extends JFrame {
     public LibroForm(LibroServicio libroServicio){
         this.libroServicio = libroServicio;
         iniciarForma();
+
         agregarButton.addActionListener(e -> agregarLibro());
         tablaLibros.addMouseListener(new MouseAdapter() {
             @Override
@@ -40,7 +41,9 @@ public class LibroForm extends JFrame {
                 cargarLibroSeleccionado();
             }
         });
+
         modificarButton.addActionListener(e -> modificarLibro());
+
         eliminarButton.addActionListener(e -> eliminarLibro());
     }
 
