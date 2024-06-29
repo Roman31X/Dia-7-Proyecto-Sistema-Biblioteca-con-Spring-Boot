@@ -41,6 +41,7 @@ public class LibroForm extends JFrame {
             }
         });
         modificarButton.addActionListener(e -> modificarLibro());
+        eliminarButton.addActionListener(e -> eliminarLibro());
     }
 
     private void iniciarForma(){
@@ -83,7 +84,7 @@ public class LibroForm extends JFrame {
     private void cargarLibroSeleccionado(){
         // Los índices de las columnas de las tablas inician en cero
         var reglon = tablaLibros.getSelectedRow();
-        if(reglon != 1){  // Regresa -1 si no se seleccionó ningún registro
+        if(reglon != -1){  // Regresa -1 si no se seleccionó ningún registro
             // Llenamos la información de los demás
             String idLibro = tablaLibros.getModel().getValueAt(reglon,0).toString();
             idTexto.setText(idLibro);
@@ -124,6 +125,21 @@ public class LibroForm extends JFrame {
         }
     }
 
+    private void eliminarLibro(){
+        var reglon = tablaLibros.getSelectedRow();
+        if(reglon != -1){
+            String idLibro = tablaLibros.getModel().getValueAt(reglon,0).toString();
+            var libro = new Libro();
+            libro.setIdLibro(Integer.parseInt(idLibro));
+            libroServicio.eliminarLibro(libro);
+            mostrarMensaje("Libro ID: ["+idLibro+"] eliminado");
+            limpiarFormulario();
+            listarLibros();
+        }else{
+            mostrarMensaje("No se a seleccionado ningún libro a eliminar");
+        }
+    }
+
     private void limpiarFormulario(){
         libroTexto.setText("");
         autorTexto.setText("");
@@ -143,12 +159,19 @@ public class LibroForm extends JFrame {
         idTexto = new JTextField("");
         idTexto.setVisible(false);
 
-        this.tablaModeloLibros = new DefaultTableModel(0,5);
+        this.tablaModeloLibros = new DefaultTableModel(0,5){
+            @Override
+            public boolean isCellEditable(int row, int colum){return false;};
+        };
+
         String[] cabeceros = {"ID","LIBRO","AUTOR","PRECIO","EXISTENCIAS"};
         this.tablaModeloLibros.setColumnIdentifiers(cabeceros);
 
         //Se crea una instancia el objeto de JTable
         this.tablaLibros = new JTable(tablaModeloLibros);
+
+        //Evitar que se seleccione varios registros
+        tablaLibros.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         listarLibros();
     }
 
