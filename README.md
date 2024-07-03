@@ -23,8 +23,6 @@ siguientes puntos:
     - Provee soporte no solo para obtener archivos de su repositorio.
     - También para subir artefactos al repositorio al final de la construcción
       de la aplicación, dejándola al acceso de todos los usuarios.
-- [x] ***Test con JUnit***
-    - Sirven para comprobar si se cumple una condición sobre el resultado obtenido.
 - [x] ***Principios SOLID***
     - Fundamental en el desarrollo de software orientado a objetos.
     - Proporcionando un marco para crear código más limpio, mantenible y escalable.
